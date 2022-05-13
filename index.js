@@ -6,6 +6,13 @@ const thoughtRoute = require("./routes/thoughts");
 const app = express();
 const port = 8080;
 
+process.on("uncaughtException", (error) => {
+  console.error(error);
+});
+
+app.use("/api/user", userRoute);
+app.use("/api/thought", thoughtRoute);
+
 app.use((req, res, next) => {
   req.on("data", (data) => {
     req.body = JSON.parse(`${data}`);
@@ -13,12 +20,9 @@ app.use((req, res, next) => {
   });
 });
 
-process.on("uncaughtException", (error) => {
-  console.error(error);
+app.get("", (req, res) => {
+  res.send("Hello");
 });
-
-app.use("api/user", userRoute);
-app.use("api/thought", thoughtRoute);
 
 mongoose.connect(
   `mongodb+srv://Omar:root@cluster0.l4g3c.mongodb.net/socialapp2?retryWrites=true&w=majority`,
