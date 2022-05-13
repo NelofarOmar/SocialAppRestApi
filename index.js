@@ -10,30 +10,27 @@ process.on("uncaughtException", (error) => {
   console.error(error);
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use("/api/user", userRoute);
 app.use("/api/thought", thoughtRoute);
-
-app.use((req, res, next) => {
-  req.on("data", (data) => {
-    req.body = JSON.parse(`${data}`);
-    next();
-  });
-});
 
 app.get("", (req, res) => {
   res.send("Hello");
 });
 
-mongoose.connect(
-  `mongodb+srv://Omar:root@cluster0.l4g3c.mongodb.net/socialapp2?retryWrites=true&w=majority`,
+const db = mongoose.connect(
+  `mongodb+srv://Omar:root@cluster0.l4g3c.mongodb.net/Cluster0?retryWrites=true&w=majority`,
   {
-    useUnifiedTopology: true,
+    // useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true,
-    autoIndex: true,
+    // useCreateIndex: true,
+    // autoIndex: true,
   },
   () => {
     console.log("Connected to DB!");
+    // console.log(db);
   }
 );
 

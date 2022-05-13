@@ -3,8 +3,8 @@ const { formatDate } = require("../Utils");
 
 const ReactionSchema = new mongoose.Schema({
   reactionId: {
-    type: Schema.Types.ObjectId,
-    default: () => new Schema.Types.ObjectId(),
+    type: mongoose.Schema.Types.ObjectId,
+    default: () => new mongoose.Schema.Types.ObjectId(),
   },
   reactionBody: {
     type: String,
