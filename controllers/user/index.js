@@ -2,13 +2,6 @@ const User = require("../../models/User");
 const { responder } = require("../../Utils");
 const user = {
   async getAllUsers(req, res) {
-    // try {
-    //   const users = await User.find({});
-    //   res.json(users);
-    // } catch (err) {
-    //   console.log(err);
-    //   res.status(400).json(err);
-    // }
     try {
       const users = await User.find({}).then(
         (data) => {
@@ -22,6 +15,7 @@ const user = {
     } catch (error) {
       responder(200, "", res);
     }
+    res.end();
   },
 
   async getUser(req, res) {
@@ -54,6 +48,7 @@ const user = {
       console.log(err);
       responder(500, { error: err.message }, res);
     }
+    res.end();
   },
 
   async updateUser(req, res) {
@@ -86,6 +81,7 @@ const user = {
     } catch (error) {
       responder(500, { error: err.message }, res);
     }
+    res.end();
   },
 
   async deleteUser(req, res) {
@@ -122,7 +118,9 @@ const user = {
       responder(200, { message: "user deleted successfully ", user }, res);
     } catch (error) {
       responder(500, { error: error.message }, res);
+      return;
     }
+    res.end();
   },
 
   async addFriendToUser(req, res) {
@@ -153,7 +151,9 @@ const user = {
       responder(200, { message: "Friend added to user" }, res);
     } catch (err) {
       responder(500, { error: err.message }, res);
+      return;
     }
+    res.end();
   },
 
   async deleteFriendFromUser(req, res) {
@@ -183,7 +183,9 @@ const user = {
     } catch (err) {
       console.log(err);
       responder(200, { error: err.message }, res);
+      return;
     }
+    res.end();
   },
 };
 

@@ -26,7 +26,7 @@ const db = mongoose.connect(
     // useUnifiedTopology: true,
     useNewUrlParser: true,
     // useCreateIndex: true,
-    // autoIndex: true,
+    autoIndex: true,
   },
   () => {
     console.log("Connected to DB!");
