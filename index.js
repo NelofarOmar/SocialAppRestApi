@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const userRoute = require("./routes/users");
+const thoughtRoute = require("./routes/thoughts");
 
 const app = express();
 const port = 8080;
@@ -14,6 +16,9 @@ app.use((req, res, next) => {
 process.on("uncaughtException", (error) => {
   console.error(error);
 });
+
+app.use("api/user", userRoute);
+app.use("api/thought", thoughtRoute);
 
 mongoose.connect(
   `mongodb+srv://Omar:root@cluster0.l4g3c.mongodb.net/socialapp2?retryWrites=true&w=majority`,
